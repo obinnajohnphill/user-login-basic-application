@@ -1,16 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
-}
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['username']);
-    header('location: login.php');
-}
-
 require_once('../Controllers/RegistrationController.php');
 require_once('../Controllers/LoginController.php');
 require_once "router.php";
@@ -23,9 +13,41 @@ route('/login_post', function () {
     return (new LoginController)->login();
 });
 
+route('/', function () {
+    if (!isset($_SESSION['username'])) {
+        $_SESSION['msg'] = "You must log in first";
+        //header('login.php');
+        echo '<script type="text/javascript">location.href = \'login.php\';</script>';
+    }
+    if (isset($_GET['logout'])) {
+        session_destroy();
+        unset($_SESSION['username']);
+        //header('login.php');
+        echo '<script type="text/javascript">location.href = \'login.php\';</script>';
+    }
+});
+
 $action = $_SERVER['REQUEST_URI'];
 dispatch($action);
 
+
+
+
+
+
+
+
+/*
+if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header('location: login.php');
+}
+*/
 
 ?>
 

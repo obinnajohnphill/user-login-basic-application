@@ -11,8 +11,9 @@ class LoginController
 
     function __construct()
     {
-        echo "here";
+        echo $_POST['username'];
         die();
+
         $this->username = $_POST['username'];
         $this->password = $_POST['password'];
         $db = new DatabaseConnection();
@@ -22,7 +23,7 @@ class LoginController
 
     function login()
     {
-
+echo "hdhhdd";
 
         if (isset($_POST['login_user'])) {
             $this->username = mysqli_real_escape_string($this->db, $this->username);
