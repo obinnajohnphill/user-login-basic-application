@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +13,12 @@
     <h2>User Login Page </h2>
 </div>
 <form method="post" action="/login_post">
+    <?php
+    if($_SESSION['wrong_username_password']){?>
+        <?php
+        echo '<div class="error">
+             '.$_SESSION['wrong_username_password'].'
+            <div>';}?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;
