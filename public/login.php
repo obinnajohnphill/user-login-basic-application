@@ -9,8 +9,8 @@
 <div class="header">
     <h2>User Login Page </h2>
 </div>
-
 <form method="post" action="/login_post">
+    <? include('errors.php'); ?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;

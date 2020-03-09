@@ -36,6 +36,6 @@ class RegistrationModel
         mysqli_query($this->db, $query);
         $_SESSION['username'] = $this->username;
         $_SESSION['success'] = "You are now logged in";
-        header('location: index.php');
+        header('/');
      }
 }

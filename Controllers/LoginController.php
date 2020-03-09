@@ -1,7 +1,7 @@
 <?php
 
 require_once('../Models/DatabaseConnection.php');
-
+require_once('../Models/LoginModel.php');
 
 class LoginController
 {
@@ -9,31 +9,40 @@ class LoginController
     protected $password;
     protected $db;
 
-    function __construct() {
-
-       $this->username = $_POST['username'];
-       $this->password = $_POST['password'];
-       $db = new DatabaseConnection();
-       $this->db = $db->connect();
-       $this->login();
+    function __construct()
+    {
+        echo "here";
+        die();
+        $this->username = $_POST['username'];
+        $this->password = $_POST['password'];
+        $db = new DatabaseConnection();
+        $this->db = $db->connect();
+        $this->login();
     }
 
-    function login() {
+    function login()
+    {
+
+
         if (isset($_POST['login_user'])) {
-            $this->username = mysqli_real_escape_string($this->db,  $this->username);
-            $this->password = mysqli_real_escape_string($this->db, $this->password );
+            $this->username = mysqli_real_escape_string($this->db, $this->username);
+            $this->password = mysqli_real_escape_string($this->db, $this->password);
 
-            if (empty($this->username)) {
-                $_SESSION['username_empty'] = "Username is required";
-                header('location: login.php');
+            $login = new LoginModel($this->username, $this->password, $this->db);
+            $permission = $login->check_login();
+            if ($permission) {
+                $_SESSION['username'] = $this->username;
+                $_SESSION['success'] = "You are now logged in";
+                header('/');
             }
-            if (empty($this->password)) {
-                $_SESSION['password_empty']  = "Password is required";
-                header('location: login.php');
+            if (!$permission) {
+                $_SESSION['wrong_username_password'] = "Wrong username/password combination";
+                header('/');
             }
+
+            }
+
+            return null;
+
         }
-
-        return null;
-
-    }
 }
