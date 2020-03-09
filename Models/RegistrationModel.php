@@ -16,7 +16,6 @@ class RegistrationModel
         $this->password = $password;
         $this->email = $email;
         $this->db = $db;
-
         $this->check_account();
     }
 
@@ -31,8 +30,7 @@ class RegistrationModel
 
     function create_account(){
         $this->password = md5($this->password_1);//encrypt the password before saving in the database
-        $query = "INSERT INTO users (username, email, password) 
-                      VALUES('$this->username', '$this->email', '$this->password')";
+        $query = "INSERT INTO users (username, email, password) VALUES('$this->username', '$this->email', '$this->password')";
         mysqli_query($this->db, $query);
         $_SESSION['username'] = $this->username;
         $_SESSION['success'] = "You are now logged in";

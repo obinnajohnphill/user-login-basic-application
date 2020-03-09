@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +14,12 @@
 </div>
 
 <form method="post" action="/registration_post">
+    <?php
+    if($_SESSION['user_exist']){?>
+        <?php
+        echo '<div class="error">
+             '.$_SESSION['user_exist'].'
+            <div>';}?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;

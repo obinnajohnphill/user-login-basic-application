@@ -35,16 +35,20 @@ class RegistrationController
 
             if ($user) { // if user exists
                 if ($user['username'] === $username) {
-                   array_push($errors, "Username already exists");
+                    $_SESSION['user_exist'] = "Username already exists";
+                    echo  $_SESSION['user_exist']."1";
+                    echo '<script type="text/javascript">location.href = \'register.php\';</script>';
+                    exit();
                 }
-
                 if ($user['email'] === $email) {
-                   array_push($errors, "email already exists");
+                    $_SESSION['user_exist'] = "Email already exists";
+                    echo  $_SESSION['user_exist']."2";
+                    echo '<script type="text/javascript">location.href = \'register.php\';</script>';
                 }
             }
 
-            // Finally, register user if there are no errors in the form
-            if (count($errors) == 0) {
+            // Finally, register user does not exist
+            if (!$user) {
                $create_account = new RegistrationModel($username,$password_1,$email,$this->db);
                $create_account->create_account();
             }

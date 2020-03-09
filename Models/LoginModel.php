@@ -6,7 +6,6 @@ class LoginModel
 {
     protected $username;
     protected $password;
-    protected $errors;
     protected $db;
 
     function __construct($username,$password,$db) {
