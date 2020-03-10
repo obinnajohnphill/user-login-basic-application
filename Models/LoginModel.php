@@ -16,8 +16,8 @@ class LoginModel
     }
 
     function check_login() {
-            $this->password = md5($this->password);
-            $query = "SELECT * FROM users WHERE username='$this->username' AND password='$this->password'";
+            $password = md5($this->password);
+            $query = "SELECT * FROM users WHERE username='$this->username' AND password='$password'";
             $results = mysqli_query($this->db, $query);
             if (mysqli_num_rows($results) == 1) {
                return true;

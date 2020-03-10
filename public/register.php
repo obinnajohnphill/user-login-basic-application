@@ -19,7 +19,9 @@ session_start();
         <?php
         echo '<div class="error">
              '.$_SESSION['user_exist'].'
-            <div>';}?>
+            <div>';}
+    unset($_SESSION['user_exist']);
+    ?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;

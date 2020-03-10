@@ -6,7 +6,6 @@ class RegistrationModel
 {
     protected $username;
     protected $password;
-    protected $password_1;
     protected $email;
     protected $db;
 
@@ -29,7 +28,7 @@ class RegistrationModel
     }
 
     function create_account(){
-        $this->password = md5($this->password_1);//encrypt the password before saving in the database
+        $this->password = md5($this->password);//encrypt the password before saving in the database
         $query = "INSERT INTO users (username, email, password) VALUES('$this->username', '$this->email', '$this->password')";
         mysqli_query($this->db, $query);
         $_SESSION['username'] = $this->username;

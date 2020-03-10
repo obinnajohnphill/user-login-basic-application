@@ -44,7 +44,7 @@ if (isset($_GET['logout'])) {
 <body>
 
 <div class="header">
-    <h2>Wall Family Europe User Registration Task</h2>
+    <h2>User Registration Task</h2>
 </div>
 <div class="content">
     <!-- notification message -->
