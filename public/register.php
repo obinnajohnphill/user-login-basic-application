@@ -14,14 +14,6 @@ session_start();
 </div>
 
 <form method="post" action="/registration_post">
-    <?php
-    if($_SESSION['user_exist']){?>
-        <?php
-        echo '<div class="error">
-             '.$_SESSION['user_exist'].'
-            <div>';}
-    unset($_SESSION['user_exist']);
-    ?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;

@@ -4,10 +4,23 @@ require_once('../Models/DatabaseConnection.php');
 
 class LoginModel
 {
+    /**
+     * Login Model holds the login business logic (data processes)
+     *
+     * @var string $username
+     * @var string $password
+     * * @var object $db
+     */
     protected $username;
     protected $password;
     protected $db;
 
+    /**
+     * Instantiates db connect
+     * @param $username
+     * @param $password
+     * @param $db
+     */
     function __construct($username,$password,$db) {
         $this->username = $username;
         $this->password = $password;
@@ -15,6 +28,9 @@ class LoginModel
         $this->check_login();
     }
 
+    /**
+     * Select user data from db
+     */
     function check_login() {
             $password = md5($this->password);
             $query = "SELECT * FROM users WHERE username='$this->username' AND password='$password'";

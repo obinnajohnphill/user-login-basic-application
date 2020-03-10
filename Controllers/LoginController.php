@@ -5,10 +5,20 @@ require_once('../Models/LoginModel.php');
 
 class LoginController
 {
+/**
+ * Login Controller holds the login logic
+ *
+ * @var string $username
+ * @var string $password
+ * * @var object $db
+ */
     protected $username;
     protected $password;
     protected $db;
 
+    /**
+     * Instantiates db connect
+     */
     function __construct()
     {
 
@@ -19,6 +29,9 @@ class LoginController
         $this->login();
     }
 
+    /**
+     * Login if user is permitted
+     */
     function login()
     {
         if (isset($_POST['login_user'])) {

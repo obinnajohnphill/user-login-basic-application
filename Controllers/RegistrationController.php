@@ -6,18 +6,27 @@ require_once('../Models/RegistrationModel.php');
 
 class RegistrationController
 {
+    /**
+     * Registration Controller holds the registration logic
+     *
+     * * @var object $db
+     */
     protected $db;
 
+    /**
+     * Instantiates db connect and calls the register function
+     */
     function __construct() {
         $db = new DatabaseConnection();
         $this->db = $db->connect();
         $this->register();
     }
 
-
+    /**
+     * Checks if user exists
+     * Creates user account if not
+     */
     public function register(){
-        $errors = array();
-        // REGISTER USER
         if (isset($_POST['reg_user'])) {
             // receive all input values from the form
             $username = mysqli_real_escape_string($this->db, $_POST['username']);
@@ -33,27 +42,12 @@ class RegistrationController
             $user = new RegistrationModel($username,$password_1,$email,$this->db);
             $user = $user->check_account();
 
-            if ($user) { // if user exists
-                if ($user['username'] === $username) {
-                    $_SESSION['user_exist'] = "Username already exists";
-                    echo  $_SESSION['user_exist']."1";
-                    echo '<script type="text/javascript">location.href = \'register.php\';</script>';
-                    exit();
-                }
-                if ($user['email'] === $email) {
-                    $_SESSION['user_exist'] = "Email already exists";
-                    echo  $_SESSION['user_exist']."2";
-                    echo '<script type="text/javascript">location.href = \'register.php\';</script>';
-                }
-            }
-
-            // Finally, register user does not exist
+            // Register user does not exist
             if (!$user) {
                $create_account = new RegistrationModel($username,$password_1,$email,$this->db);
                $create_account->create_account();
             }
-
-           return null;
+            return false;
 
         }
 
