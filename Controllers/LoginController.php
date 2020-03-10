@@ -1,5 +1,6 @@
 <?php
 
+require_once('../Models/DatabaseConnection.php');
 require_once('../Models/LoginModel.php');
 
 class LoginController extends DatabaseConnection
