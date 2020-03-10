@@ -30,7 +30,8 @@ class RegistrationController extends DatabaseConnection
             $password_2 = mysqli_real_escape_string($this->connect(), $_POST['password_2']);
 
             if ($password_1 != $password_2) {
-                array_push($errors, "The two passwords do not match");
+                $_SESSION['password_mismatch'] = "The two passwords do not match";
+                echo '<script type="text/javascript">location.href = \'register.php\';</script>';
             }
 
             // Call registration model

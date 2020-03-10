@@ -14,6 +14,12 @@ session_start();
 </div>
 
 <form method="post" action="/registration_post">
+    <?php
+    if($_SESSION['password_mismatch'] ){?>
+        <?php
+        echo '<div class="error">
+             '.$_SESSION['password_mismatch'].'
+            <div>';}?>
     <ul class="errorMessages"
     style="width: 92%;
     margin: 0px auto;
