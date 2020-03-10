@@ -3,19 +3,19 @@
 
 class DatabaseConnection
 {
-    /**
-     * Instantiate db connection function
-     *
-     */
-    function __construct() {
 
-        $this->connect();
+/**
+ * Instantiate db connection function
+ *
+ */
+    function __construct() {
+      $this->connect();
     }
 
-    /**
-     * Create mysqli connection
-     *
-     */
+/**
+ * Create mysqli connection
+ *
+ */
     function connect() {
         $connect =  mysqli_connect('172.18.0.2', 'homestead', 'secret', 'homestead');
         if (mysqli_connect_errno()) {
