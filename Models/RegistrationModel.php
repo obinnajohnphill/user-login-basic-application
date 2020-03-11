@@ -44,8 +44,11 @@ class RegistrationModel extends DatabaseConnection
  * Creates a new user and log user in automatically
  */
     function create_account(){
-        $this->password = md5($this->password);//encrypt the password before saving in the database
-        $query = "INSERT INTO users (username, email, password) VALUES('$this->username', '$this->email', '$this->password')";
+        $options = [
+            'cost' => 16,
+        ];
+        $password =  password_hash($this->password, PASSWORD_BCRYPT, $options);
+        $query = "INSERT INTO users (username, email, password) VALUES('$this->username', '$this->email', '$password')";
         mysqli_query($this->connect(), $query);
         $_SESSION['username'] = $this->username;
         $_SESSION['success'] = "You are now logged in";

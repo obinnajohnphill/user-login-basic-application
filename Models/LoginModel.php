@@ -29,13 +29,14 @@ class LoginModel extends DatabaseConnection
  * Select user data from db
  */
     function check_login() {
-            $password = md5($this->password);
-            $query = "SELECT * FROM users WHERE username='$this->username' AND password='$password'";
-            $results = mysqli_query($this->connect(), $query);
-            if (mysqli_num_rows($results) == 1) {
-               return true;
-            }else {
-              return false;
+            $query = "SELECT * FROM users WHERE username='$this->username'";
+            $result = mysqli_query($this->connect(), $query);
+            $user = mysqli_fetch_assoc($result);
+            if (password_verify($this->password, $user['password'])) {
+                return true;
+            }
+            else {
+                  return false;
             }
     }
 }
